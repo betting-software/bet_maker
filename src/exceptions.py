@@ -1,7 +1,7 @@
 class ErrorMessage:
     EVENT_NOT_FOUND = "Event with id not found."
     INVALID_BET_SUM = "Bet sum must be greater than zero."
-    INVALID_EVENT_STATUS = "Cannot place a bet on a pending event"
+    INVALID_EVENT_STATUS = "It is not possible to place a bet on a finished event"
 
 
 class EventNotFoundError(Exception):

@@ -11,3 +11,12 @@ services:
       - .:/app
     container_name: bet_maker
     command: /bin/bash -c "alembic upgrade head && uvicorn src.app:app --host 0.0.0.0 --port 8000 --reload"
+    networks:
+      - bets
+      - shared
+
+networks:
+  bets:
+    external: true
+  shared:
+    external: true

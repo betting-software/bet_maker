@@ -1,3 +1,5 @@
+import time
+
 from src.db.dao import BetsDAO
 
 from src.schemas.events import Event, Status, UpdateEventRequest
@@ -10,7 +12,7 @@ class BetMakerController:
         self._dao = BetsDAO
 
     async def add_bet(self, event: Event, request: CreateBetRequest) -> int:
-        if event.status == Status.PENDING:
+        if event.status != Status.PENDING or event.timestamp < int(time.time()):
             raise InvalidEventStatusError
         if request.bet_sum <= 0:
             raise InvalidBetSumError
@@ -30,5 +32,5 @@ class BetMakerController:
 
     async def update_bets(self, request: UpdateEventRequest) -> None:
         await self._dao.update_filter(
-            update_values=request.model_dump(), id_event=request.id
+            update_values={"status": request.status}, id_event=request.id
         )

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from events import Status
+from src.schemas.events import Status
 
 
 class CreateBetRequest(BaseModel):

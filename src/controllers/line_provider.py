@@ -14,7 +14,8 @@ class LineProviderController:
         async with aiohttp.ClientSession() as session:
             response = await session.get(url)
             if response.status == 200:
-                return await Event(**response.json())
+                data = await response.json()
+                return Event(**data)
             raise EventNotFoundError
 
     async def get_events(self) -> EventsResponse:
@@ -23,5 +24,5 @@ class LineProviderController:
             response = await session.get(url)
             if response.status == 200:
                 data = await response.json()
-                return [EventsResponse(**item) for item in data]
+                return EventsResponse(**data)
             raise EventNotFoundError

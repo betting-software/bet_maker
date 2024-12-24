@@ -9,3 +9,9 @@ services:
       - .:/app
     ports:
       - "5436:5432"
+    networks:
+      - bets
+
+networks:
+  bets:
+    external: true
